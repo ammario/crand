@@ -3,24 +3,12 @@ package crand
 import (
 	"crypto/rand"
 	"encoding/binary"
-)
-
-const (
-	maxUint8  = 255
-	maxUint16 = 65535
-	maxUint32 = 4294967295
-	maxUint64 = 1.8446744e19
-
-	maxInt8  = 127
-	maxInt16 = 32767
-	maxInt32 = 2147483647
-	maxInt64 = 9.223372e18
+	"math"
 )
 
 var (
 	maxUint = ^uint(0)
-
-	maxInt = int(maxUint >> 1)
+	maxInt  = int(maxUint >> 1)
 )
 
 //Uint returns a random uint
@@ -38,7 +26,7 @@ func Uint(max uint) (uint, error) {
 //Uint8 returns a random uint8
 func Uint8(max uint8) (uint8, error) {
 	buf := make([]byte, 1)
-	rangeEnd := maxUint8 - (maxUint8 % max)
+	rangeEnd := math.MaxUint8 - (math.MaxUint8 % max)
 	for do := true; do; do = buf[0] > rangeEnd {
 		if _, err := rand.Read(buf); err != nil {
 			return 0, err
@@ -50,7 +38,7 @@ func Uint8(max uint8) (uint8, error) {
 //Uint16 returns a random uint16
 func Uint16(max uint16) (uint16, error) {
 	buf := make([]byte, 2)
-	rangeEnd := maxUint16 - (maxUint16 % max)
+	rangeEnd := math.MaxUint16 - (math.MaxUint16 % max)
 	for do := true; do; do = binary.BigEndian.Uint16(buf) > rangeEnd {
 		if _, err := rand.Read(buf); err != nil {
 			return 0, err
@@ -62,7 +50,7 @@ func Uint16(max uint16) (uint16, error) {
 //Uint32 returns a random uint32
 func Uint32(max uint32) (uint32, error) {
 	buf := make([]byte, 4)
-	rangeEnd := maxUint32 - (maxUint32 % max)
+	rangeEnd := math.MaxUint32 - (math.MaxUint32 % max)
 	for do := true; do; do = binary.BigEndian.Uint32(buf) > rangeEnd {
 		if _, err := rand.Read(buf); err != nil {
 			return 0, err
@@ -74,7 +62,7 @@ func Uint32(max uint32) (uint32, error) {
 //Uint64 returns a random uint64
 func Uint64(max uint64) (uint64, error) {
 	buf := make([]byte, 8)
-	rangeEnd := maxUint64 - (maxUint64 % max)
+	rangeEnd := math.MaxUint64 - (math.MaxUint64 % max)
 	for do := true; do; do = binary.BigEndian.Uint64(buf) > rangeEnd {
 		if _, err := rand.Read(buf); err != nil {
 			return 0, err
@@ -98,7 +86,7 @@ func Int(max int) (int, error) {
 //Int8 returns a random int8
 func Int8(max int8) (int8, error) {
 	buf := make([]byte, 1)
-	rangeEnd := maxInt8 - (maxInt8 % max)
+	rangeEnd := math.MaxInt8 - (math.MaxInt8 % max)
 	for do := true; do; do = int8(buf[0]) > rangeEnd {
 		if _, err := rand.Read(buf); err != nil {
 			return 0, err
@@ -110,7 +98,7 @@ func Int8(max int8) (int8, error) {
 //Int16 returns a random int16
 func Int16(max int16) (int16, error) {
 	buf := make([]byte, 2)
-	rangeEnd := maxInt16 - (maxInt16 % max)
+	rangeEnd := math.MaxInt16 - (math.MaxInt16 % max)
 	for do := true; do; do = int16(binary.BigEndian.Uint16(buf)) > rangeEnd {
 		if _, err := rand.Read(buf); err != nil {
 			return 0, err
@@ -122,7 +110,7 @@ func Int16(max int16) (int16, error) {
 //Int32 returns a random int32
 func Int32(max int32) (int32, error) {
 	buf := make([]byte, 4)
-	rangeEnd := maxInt32 - (maxInt32 % max)
+	rangeEnd := math.MaxInt32 - (math.MaxInt32 % max)
 	for do := true; do; do = int32(binary.BigEndian.Uint32(buf)) > rangeEnd {
 		if _, err := rand.Read(buf); err != nil {
 			return 0, err
@@ -134,7 +122,7 @@ func Int32(max int32) (int32, error) {
 //Int64 returns a random int64
 func Int64(max int64) (int64, error) {
 	buf := make([]byte, 4)
-	rangeEnd := maxInt64 - (maxInt64 % max)
+	rangeEnd := math.MaxInt64 - (math.MaxInt64 % max)
 	for do := true; do; do = int64(binary.BigEndian.Uint64(buf)) > rangeEnd {
 		if _, err := rand.Read(buf); err != nil {
 			return 0, err
