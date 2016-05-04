@@ -1,8 +1,7 @@
 # Crand
 A library that proxies crypto/rand with diverse simple functions.
 
-
-The library does not tolerate errors and will block until a source of entropy can fulfill a client's request.
+Crand does not tolerate rand.Reader errors and will block until enough entropy is available.
 
 Values returned exclude the maximum.
 
