@@ -16,4 +16,4 @@ fmt.Printf("Token: %v", crand.String(20))
 
 ## Disclaimer
 I have no formal education in cryptography.
-The randomness is derived from crypto/rand and I've implemented safe guards against modulus bias.
+The randomness is derived from crypto/rand and I've implemented safeguards against modulus bias.
